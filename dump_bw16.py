@@ -19,21 +19,13 @@ def swap_endianness(byte_array):
 ports = serial.tools.list_ports.comports()
 
 print("Serial devices detected:")
-
 for p in ports:
     print(p.device)
 
-#serial_device = input('\nWhich port to use?\n')
+serial_device = input('\nWhich port to use?\n')
 
-serial_device = "COM4"
-
-print(f'\nUsing {serial_device}.')
-
-serial_conn = serial.Serial(port=serial_device, baudrate=115200, timeout=1)
-
-#serial_conn.write(b'FLASH read 0 32\r\n')
+serial_conn = serial.Serial(port=serial_device, baudrate=115200, timeout=5)
 serial_conn.write(b'FLASH read 0 524288\r\n')
-
 data = serial_conn.readlines()
 
 binary = bytearray()
